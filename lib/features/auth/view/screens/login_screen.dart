@@ -4,6 +4,7 @@ import 'package:movie_app/commun/helper_padding.dart';
 import 'package:movie_app/features/auth/bloc/auth_bloc.dart';
 import 'package:movie_app/features/auth/view/widgets/gradient_button.dart';
 import 'package:movie_app/features/auth/view/widgets/login_field.dart';
+import 'package:movie_app/features/movie/view/screens/home_screen.dart';
 import 'package:movie_app/pallete.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,6 +29,13 @@ class _LoginScreenState extends State<LoginScreen> {
               content: Text(state.error),
               duration: const Duration(seconds: 2),
             ),
+          );
+        }
+        if (state is AuthSuccess) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            (route) => false,
           );
         }
       }, builder: (context, state) {
