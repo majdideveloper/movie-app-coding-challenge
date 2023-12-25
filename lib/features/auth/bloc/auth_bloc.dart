@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -10,12 +11,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         String email = event.email;
         String password = event.password;
-        if (email.length < 5) {
-          return emit(
-              AuthFailure("your email need to be more then 5 character"));
+
+        if (!email.contains("@")) {
+          return emit(AuthFailure("Please enter a valid email address"));
         }
 
-        if (password.length < 6) {
+        if (password.length < 5) {
           return emit(
               AuthFailure("your password need be more then 6 character"));
         }

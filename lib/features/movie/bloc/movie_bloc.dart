@@ -17,7 +17,9 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       try {
         List<ItemMovie> listMovies = await movieRepository.fetchMovies();
         emit(MovieSuccess(listMovies: listMovies));
-      } catch (e) {}
+      } catch (e) {
+        emit(MovieFailure(error: e.toString()));
+      }
     });
 
     on<FetchDetailMovie>((event, emit) async {
